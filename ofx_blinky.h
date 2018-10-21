@@ -21,6 +21,7 @@ public:
     ofVec2f getPosition(void);
     void setSize(float radius);
     void setColor(ofColor color);
+    void setColors(ofColor foreground_color, ofColor background_color);
     void setBlinking(bool state);
     bool isBlinking();
 

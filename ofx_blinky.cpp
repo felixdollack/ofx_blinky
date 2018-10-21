@@ -81,6 +81,11 @@ void Blinky::setColor(ofColor color) {
     this->_blinky_base_color = getDarkerColor(this->_blinky_highlight_color);
 }
 
+void Blinky::setColors(ofColor foreground_color, ofColor background_color) {
+    this->_blinky_highlight_color = foreground_color;
+    this->_blinky_base_color = background_color;
+}
+
 void Blinky::setBlinkyOn(bool state) {
     this->_blinky_on_state = state;
 }
