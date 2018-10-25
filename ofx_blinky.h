@@ -24,6 +24,8 @@ public:
     void setColors(ofColor foreground_color, ofColor background_color);
     void setBlinking(bool state);
     bool isBlinking();
+    void setBlinkyOn(bool state);
+    bool isBlinkyOn(void);
 
 private:
     bool _blinking_state, _blinky_on_state;
@@ -32,8 +34,6 @@ private:
     ofColor _blinky_highlight_color, _blinky_base_color;
     float _last_blinky_update, _blinking_start_time;
 
-    void setBlinkyOn(bool state);
-    bool isBlinkyOn(void);
     static ofColor getDarkerColor(ofColor color);
 };
 
