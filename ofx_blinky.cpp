@@ -17,11 +17,7 @@ Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor, BeepMode
 };
 Blinky::Blinky(float radius, ofColor mainColor, BeepMode beepMode, bool useHighBeep) {
     this->_radius = radius;
-    if (secondaryColor == NULL) {
-        setColor(mainColor);
-    } else {
-        setColors(mainColor, secondaryColor);
-    }
+    setColor(mainColor);
     setPosition(ofVec2f(-1, -1));
     this->_beep = NULL;
     setBeepHigh(useHighBeep);
