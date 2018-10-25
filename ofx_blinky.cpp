@@ -33,7 +33,6 @@ void Blinky::update() {
             this->_last_blinky_update = time;
         }
     } else {
-        setBlinkyOn(false);
         this->_blinking_start_time = 0;
     }
 }
