@@ -110,9 +110,7 @@ void Blinky::setBeepMode(BeepMode state) {
         if (this->_beep == NULL) {
             this->_beep = new ofSoundPlayer();
         }
-        if (this->_beep->isLoaded() == false) {
-            this->_beep->load(this->_beep_filename);
-        }
+        reloadBeep();
     } else {
         if (this->_beep != NULL) {
             delete this->_beep;
@@ -128,8 +126,21 @@ void Blinky::setBeepHigh(bool state) {
     this->_use_high_beep = state;
     if (this->_use_high_beep == true) {
         this->_beep_filename = "beep_high.wav";
+        reloadBeep();
     } else {
         this->_beep_filename = "beep_low.wav";
+        reloadBeep();
+    }
+}
+
+void Blinky::reloadBeep() {
+    if (this->_beep != NULL) {
+        if (this->_beep->isLoaded() == true) {
+            this->_beep->unload();
+        }
+        if (this->_beep->isLoaded() == false) {
+            this->_beep->load(this->_beep_filename);
+        }
     }
 }
 

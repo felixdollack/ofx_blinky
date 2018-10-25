@@ -40,6 +40,7 @@ private:
     ofSoundPlayer *_beep;
     string _beep_filename;
     BeepMode _beep_mode;
+    void reloadBeep();
     bool _blinking_state, _blinky_on_state, _use_high_beep;
     float _radius, _blinking_interval_seconds;
     ofVec2f _position;
