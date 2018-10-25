@@ -20,6 +20,9 @@ class Blinky {
 public:
     Blinky(float radius);
     Blinky(float radius, ofColor mainColor);
+    Blinky(float radius, ofColor mainColor, ofColor secondaryColor);
+    Blinky(float radius, ofColor mainColor, BeepMode beepMode, bool useHighBeep);
+    Blinky(float radius, ofColor mainColor, ofColor secondaryColor, BeepMode beepMode, bool useHighBeep);
     void update(void);
     void draw(void);
     void draw(int x, int y);

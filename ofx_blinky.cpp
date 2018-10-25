@@ -8,13 +8,20 @@
 #include "ofx_blinky.h"
 
 Blinky::Blinky(float radius) : Blinky(radius, ofColor::red) {}
-Blinky::Blinky(float radius, ofColor mainColor) {
+Blinky::Blinky(float radius, ofColor mainColor) : Blinky(radius, mainColor, BeepMode::BEEP_OFF, false){}
+Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor) : Blinky(radius, mainColor, secondaryColor, BeepMode::BEEP_OFF, false){}
+Blinky::Blinky(float radius, ofColor mainColor, BeepMode beepMode, bool useHighBeep) : Blinky(radius, mainColor, NULL, beepMode, useHighBeep) {}
+Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor, BeepMode beepMode, bool useHighBeep) {
     this->_radius = radius;
-    setColor(mainColor);
+    if (secondaryColor == NULL) {
+        setColor(mainColor);
+    } else {
+        setColors(mainColor, secondaryColor);
+    }
     setPosition(ofVec2f(-1, -1));
     this->_beep = NULL;
-    setBeepHigh(false);
-    setBeepMode(BeepMode::BEEP_OFF);
+    setBeepHigh(useHighBeep);
+    setBeepMode(beepMode);
     setBlinking(false);
     this->_last_blinky_update  = ofGetElapsedTimef();
     this->_blinking_start_time = 0;
