@@ -9,13 +9,11 @@
 
 Blinky::Blinky(float radius) : Blinky(radius, ofColor::red) {}
 Blinky::Blinky(float radius, ofColor mainColor) : Blinky(radius, mainColor, BeepMode::BEEP_OFF, false){}
-Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor) : Blinky(radius, mainColor, secondaryColor, BeepMode::BEEP_OFF, false){
-    setColors(mainColor, secondaryColor);
-}
-Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor, BeepMode beepMode, bool useHighBeep) : Blinky(radius, mainColor, beepMode, useHighBeep) {
+Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor) : Blinky(radius, mainColor, secondaryColor, BeepMode::BEEP_OFF, false, 0.5f){}
+Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor, BeepMode beepMode, bool useHighBeep, float blinkingSpeedHz) : Blinky(radius, mainColor, beepMode, useHighBeep, blinkingSpeedHz) {
     setColors(mainColor, secondaryColor);
 };
-Blinky::Blinky(float radius, ofColor mainColor, BeepMode beepMode, bool useHighBeep) {
+Blinky::Blinky(float radius, ofColor mainColor, BeepMode beepMode, bool useHighBeep, float blinkingSpeedHz) {
     this->_radius = radius;
     setColor(mainColor);
     setPosition(ofVec2f(-1, -1));
@@ -25,7 +23,7 @@ Blinky::Blinky(float radius, ofColor mainColor, BeepMode beepMode, bool useHighB
     setBlinking(false);
     this->_last_blinky_update  = ofGetElapsedTimef();
     this->_blinking_start_time = 0;
-    this->_blinking_interval_seconds = 0.5f; // 1 sec / 2 Hz
+    this->_blinking_interval_seconds = blinkingSpeedHz/2.0f; // Hz / (1 on + 1 off state)
 }
 
 void Blinky::update() {
