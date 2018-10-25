@@ -9,9 +9,13 @@
 
 Blinky::Blinky(float radius) : Blinky(radius, ofColor::red) {}
 Blinky::Blinky(float radius, ofColor mainColor) : Blinky(radius, mainColor, BeepMode::BEEP_OFF, false){}
-Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor) : Blinky(radius, mainColor, secondaryColor, BeepMode::BEEP_OFF, false){}
-Blinky::Blinky(float radius, ofColor mainColor, BeepMode beepMode, bool useHighBeep) : Blinky(radius, mainColor, NULL, beepMode, useHighBeep) {}
-Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor, BeepMode beepMode, bool useHighBeep) {
+Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor) : Blinky(radius, mainColor, secondaryColor, BeepMode::BEEP_OFF, false){
+    setColors(mainColor, secondaryColor);
+}
+Blinky::Blinky(float radius, ofColor mainColor, ofColor secondaryColor, BeepMode beepMode, bool useHighBeep) : Blinky(radius, mainColor, beepMode, useHighBeep) {
+    setColors(mainColor, secondaryColor);
+};
+Blinky::Blinky(float radius, ofColor mainColor, BeepMode beepMode, bool useHighBeep) {
     this->_radius = radius;
     if (secondaryColor == NULL) {
         setColor(mainColor);
