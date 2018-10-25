@@ -12,6 +12,9 @@ Blinky::Blinky(float radius, ofColor mainColor) {
     this->_radius = radius;
     setColor(mainColor);
     setPosition(ofVec2f(-1, -1));
+    this->_beep = NULL;
+    setBeepHigh(false);
+    setBeepMode(BeepMode::BEEP_OFF);
     setBlinking(false);
     this->_last_blinky_update  = ofGetElapsedTimef();
     this->_blinking_start_time = 0;
@@ -87,9 +90,47 @@ void Blinky::setColors(ofColor foreground_color, ofColor background_color) {
 
 void Blinky::setBlinkyOn(bool state) {
     this->_blinky_on_state = state;
+    if (this->_blinky_on_state == true) {
+        if (getBeepMode() > BeepMode::BEEP_OFF) {
+            this->_beep->play();
+        }
+    } else {
+        if (getBeepMode() > BeepMode::BEEP_ON_START) {
+            this->_beep->play();
+        }
+    }
 }
 bool Blinky::isBlinkyOn() {
     return this->_blinky_on_state;
+}
+
+void Blinky::setBeepMode(BeepMode state) {
+    this->_beep_mode = state;
+    if (this->_beep_mode > BeepMode::BEEP_OFF) {
+        if (this->_beep == NULL) {
+            this->_beep = new ofSoundPlayer();
+        }
+        if (this->_beep->isLoaded() == false) {
+            this->_beep->load(this->_beep_filename);
+        }
+    } else {
+        if (this->_beep != NULL) {
+            delete this->_beep;
+        }
+        this->_beep = NULL;
+    }
+}
+BeepMode Blinky::getBeepMode() {
+    return this->_beep_mode;
+}
+
+void Blinky::setBeepHigh(bool state) {
+    this->_use_high_beep = state;
+    if (this->_use_high_beep == true) {
+        this->_beep_filename = "beep_high.wav";
+    } else {
+        this->_beep_filename = "beep_low.wav";
+    }
 }
 
 ofColor Blinky::getDarkerColor(ofColor color) {

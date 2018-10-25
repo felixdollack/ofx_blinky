@@ -10,6 +10,12 @@
 
 #include "ofMain.h"
 
+enum BeepMode {
+    BEEP_OFF = 0,
+    BEEP_ON_START,
+    BEEP_ON_END
+};
+
 class Blinky {
 public:
     Blinky(float radius);
@@ -26,9 +32,15 @@ public:
     bool isBlinking();
     void setBlinkyOn(bool state);
     bool isBlinkyOn(void);
+    void setBeepMode(BeepMode state);
+    BeepMode getBeepMode(void);
+    void setBeepHigh(bool state);
 
 private:
-    bool _blinking_state, _blinky_on_state;
+    ofSoundPlayer *_beep;
+    string _beep_filename;
+    BeepMode _beep_mode;
+    bool _blinking_state, _blinky_on_state, _use_high_beep;
     float _radius, _blinking_interval_seconds;
     ofVec2f _position;
     ofColor _blinky_highlight_color, _blinky_base_color;
