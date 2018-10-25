@@ -94,12 +94,12 @@ void Blinky::setColors(ofColor foreground_color, ofColor background_color) {
 }
 
 void Blinky::setBlinkyOn(bool state) {
-    if ((this->_blinky_on_state == true) && (this->_blinky_on_state != state)) {
+    if ((this->_blinky_on_state == false) && (this->_blinky_on_state != state)) {
         if (getBeepMode() > BeepMode::BEEP_OFF) {
             this->_beep->play();
         }
     }
-    if ((this->_blinky_on_state == false) && (this->_blinky_on_state != state)) {
+    if ((this->_blinky_on_state == true) && (this->_blinky_on_state != state)) {
         if (getBeepMode() > BeepMode::BEEP_ON_START) {
             this->_beep->play();
         }
